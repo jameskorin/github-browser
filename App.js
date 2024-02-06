@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { LinearGradient } from "expo-linear-gradient"
 import Logo from './assets/github-mark.svg'
 
 export default function App() {
@@ -13,11 +13,11 @@ export default function App() {
       <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
         {/* Header */}
         <View style={styles.header}>
-        <View style={{ width: windowWidth, aspectRatio }}>
-          <Logo width="100%" 
+          <View style={{ width: windowWidth, aspectRatio }}>
+            <Logo width="100%" 
             height="100%" 
             viewBox={`0 0 ${originalWidth} ${originalHeight}`}/>
-            </View>
+          </View>
           <Text style={styles.title}>GitHub Repo Search</Text>
         </View>
 
