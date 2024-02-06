@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from './assets/github-mark.svg'
 
@@ -11,7 +11,7 @@ export default function App() {
 
   return (
       <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
-
+        {/* Header */}
         <View style={styles.header}>
         <View style={{ width: windowWidth, aspectRatio }}>
           <Logo width="100%" 
@@ -20,11 +20,30 @@ export default function App() {
             </View>
           <Text style={styles.title}>GitHub Repo Search</Text>
         </View>
+
+        {/* Search bar */}
+        <View style={styles.searchContainer}>
+          <TextInput placeholder='Search' style={styles.searchInput}/>
+        </View>
+
+        {/* List of results */}
       </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  searchContainer: {
+    width: "100%",
+    paddingHorizontal: 20,
+    marginTop: 20
+  },
+  searchInput: {
+    width: "100%",
+    backgroundColor: "#FAFAFA",
+    padding: 10,
+    borderRadius: 9,
+    color: "#000000"
+  },
   header: {
     marginTop: 75,
     flex: 1,
