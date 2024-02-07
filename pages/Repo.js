@@ -44,9 +44,15 @@ export default function Repo() {
                 </View>
             </View>
         </View>
-        <View style={styles.break}/>
-        <View style={styles.section}>
 
+        <View style={styles.break}/>
+
+        <View style={styles.section}>
+            <Text>{repo.description}</Text>
+
+            <Text>Languages</Text>
+
+            <Text>{repo.language}</Text>
         </View>
 
     </LinearGradient>
