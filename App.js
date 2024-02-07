@@ -1,8 +1,9 @@
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, FlatList, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import Logo from './assets/github-mark.svg'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import RepoCard from './components/RepoCard'
 
 export default function App() {
 
@@ -14,13 +15,8 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
   const [repos, setRepos] = useState([]);
 
-  useEffect(() => {
-    console.log(searchQuery);
-  },[searchQuery])
-
   const search =async ()=> {
     const url = `https://api.github.com/search/repositories?q=${searchQuery}&per_page=20`;
-    console.log(`fetching: ${searchQuery}`);
     try {
       const r = await axios.get(url,{
         headers: {
@@ -29,9 +25,8 @@ export default function App() {
           "X-GitHub-Api-Version": '2022-11-28',
         }
       });
-      console.log('done');
-      console.log(r.data);
       setRepos(r.data.items);
+      console.log(r.data.items.length);
     } catch (err) {
       console.log(JSON.stringify(err));
     }
@@ -39,6 +34,9 @@ export default function App() {
 
   return (
       <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
+
+        <SafeAreaView>
+
         {/* Header */}
         <View style={styles.header}>
           <View style={{ width: windowWidth, aspectRatio }}>
@@ -58,11 +56,18 @@ export default function App() {
         onPress={search}/>
 
         {/* List of results */}
-        {repos.map((item,index) => (
-          <View>
-            <Text>{item.name}</Text>
-          </View>
-        ))}
+        <FlatList
+        style={styles.cardList}
+        data={repos}
+        renderItem={({item}) => (
+          <RepoCard
+          repo={item}
+          key={item.id}
+          onPress={() => console.log(item.name)}/>
+        )}
+        />
+
+        </SafeAreaView>
       </LinearGradient>
   );
 }
@@ -70,7 +75,6 @@ export default function App() {
 const styles = StyleSheet.create({
   searchContainer: {
     width: "100%",
-    paddingHorizontal: 20,
     marginTop: 20
   },
   searchInput: {
@@ -82,11 +86,9 @@ const styles = StyleSheet.create({
   },
   header: {
     marginTop: 75,
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    paddingStart: 20,
     maxHeight: 50
   },
   logo: {
@@ -98,9 +100,14 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   linearGradient: {
-    flex: 1,
-    alignItems: 'center'
-  }
+    alignItems: "center",
+    backgroundColor: "red",
+    paddingHorizontal: 30
+  },
+  cardList: {
+    width: "100%",
+
+  }  
 });
 
 
