@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 import { useFonts } from 'expo-font'
+import { Context } from '../App'
 
 export default function RepoCard({
     repo,
     navigate
 }) {
 
+    const context = useContext(Context);
+
     const [fontsLoaded] = useFonts({
         'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
         'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
     });
 
-    return <TouchableWithoutFeedback onPress={() => navigate('Repo')}>
+    return <TouchableWithoutFeedback onPress={() => {
+        context.setSelectedRepo(repo.id);
+        navigate('Repo');
+    }}>
     <View style={styles.card} onPress={() => console.log(repo.name)}>
         <View style={styles.cardTopRow}>
             <Image style={styles.avatar} source={{uri: repo.owner.avatar_url}}/>

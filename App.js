@@ -57,5 +57,9 @@ export default function App() {
 
 // Fix font import issue
 
+// Truncate long full names on cards in list
+
 // Highlight search term in titles and descriptions in results page
 // Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
+
+// Check UI scaling on all device resolutions
