@@ -1,12 +1,16 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
+import { useFonts } from 'expo-font'
 
 export default function RepoCard({
     repo
 }) {
-    console.log(JSON.stringify(repo, null, 2));
-    // if(repo === undefined || repo === null) return <View><Text>oops</Text></View>;
-    // return null;
+
+    const [fontsLoaded] = useFonts({
+        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
+    });
+
     return <View style={styles.card}>
         <View style={styles.cardTopRow}>
             <Image style={styles.avatar} source={{uri: repo.owner.avatar_url}}/>
@@ -35,10 +39,12 @@ const styles = StyleSheet.create({
       alignItems: "center"
     },
     description: {
-        marginTop: 12
+        marginTop: 12,
+        fontFamily: 'SF-Pro-Display-Regular'
     },
     name: {
-        marginLeft: 11
+        marginLeft: 11,
+        fontFamily: 'SF-Pro-Display-Regular'
     },  
     avatar: {
         width: 24,
