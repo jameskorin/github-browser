@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Search from './pages/Search'
 import Repo from './pages/Repo'
 import axios from 'axios'
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
 
 const Stack = createNativeStackNavigator();
 
@@ -34,7 +34,9 @@ export default function App() {
       <NavigationContainer>
         <Context.Provider value={{
           repos: repos,
-          search: search
+          search: search,
+          selectedRepo: selectedRepo,
+          setSelectedRepo: setSelectedRepo
         }}>
       <Stack.Navigator>
         <Stack.Screen name="Search" component={Search}/>
@@ -48,11 +50,12 @@ export default function App() {
 // Navigate to second page with details
 // Navigate back to main page with back arrow
 
-// Create context provider
-// Get the list at the root and pass it down via context
+// Get rid of that hokey ass header from the navigation wrapper
 
 // Collapse the header on scroll
 // Debounce on search input update and call endpoint from input changes
+
+// Fix font import issue
 
 // Highlight search term in titles and descriptions in results page
 // Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)

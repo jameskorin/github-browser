@@ -7,12 +7,12 @@ import SearchBar from '../components/SearchBar'
 import { useFonts } from 'expo-font'
 import { Context } from '../App'
 
-export default function Search() {
+export default function Search({ navigation }) {
 
   const originalWidth = 98;
   const originalHeight = 96;
   const aspectRatio = originalWidth / originalHeight;
-  const windowWidth = 50;
+  const windowWidth = 40;
 
   const context = useContext(Context);
   const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
@@ -21,7 +21,7 @@ export default function Search() {
     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
   });
-
+  
   return (
       <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
@@ -49,9 +49,8 @@ export default function Search() {
           <RepoCard
           repo={item}
           key={item.id}
-          onPress={() => console.log(item.name)}/>
-        )}
-        />
+          navigate={navigation.navigate}/>
+        )}/>
       </LinearGradient>
   );
 }

@@ -22,7 +22,7 @@ export default function SearchBar({
         onChangeText={text => setSearchQuery(text)} 
         value={searchQuery}/>
 
-        <ClearSearchIcon onPress={() => setSearchQuery('')}/>
+        <ClearSearchIcon width="18px" height="18px" onPress={() => setSearchQuery('')}/>
     </View>;
 }
 
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
         color: "#000000",
         marginTop: 20,
         marginHorizontal: 30,
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: "center"
     },
     searchInput: {
       width: "100%",

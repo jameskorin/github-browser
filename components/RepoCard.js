@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 import { useFonts } from 'expo-font'
 
 export default function RepoCard({
-    repo
+    repo,
+    navigate
 }) {
 
     const [fontsLoaded] = useFonts({
@@ -11,7 +12,8 @@ export default function RepoCard({
         'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
     });
 
-    return <View style={styles.card} onPress={() => console.log(repo.name)}>
+    return <TouchableWithoutFeedback onPress={() => navigate('Repo')}>
+    <View style={styles.card} onPress={() => console.log(repo.name)}>
         <View style={styles.cardTopRow}>
             <Image style={styles.avatar} source={{uri: repo.owner.avatar_url}}/>
             <Text style={styles.name}>{repo.full_name}</Text>
@@ -20,6 +22,7 @@ export default function RepoCard({
             {repo.description}
         </Text>
     </View>
+    </TouchableWithoutFeedback>
 }
 
 const styles = StyleSheet.create({
