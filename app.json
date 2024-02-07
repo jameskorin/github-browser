@@ -27,7 +27,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font",
+      ["expo-font",
       {
         "fonts": [
           ".assets/fonts/SF-Pro-Display-Black.otf",
@@ -50,6 +50,6 @@
           ".assets/fonts/SF-Pro-Display-UltralightItalic.otf"
         ]
       }
-    ]
+    ]]
   }
 }

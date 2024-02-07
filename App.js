@@ -1,28 +1,20 @@
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
-import { LinearGradient } from "expo-linear-gradient"
-import Logo from './assets/github-mark.svg'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Search from './pages/Search'
+import Repo from './pages/Repo'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
-import RepoCard from './components/RepoCard'
-import SearchBar from './components/SearchBar'
-import { useFonts } from 'expo-font'
+import { useState, createContext } from 'react'
+
+const Stack = createNativeStackNavigator();
+
+export const Context = createContext({ repos: [], search: null });
 
 export default function App() {
 
-  const originalWidth = 98;
-  const originalHeight = 96;
-  const aspectRatio = originalWidth / originalHeight;
-  const windowWidth = 50;
-
-  const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
   const [repos, setRepos] = useState([]);
+  const [selectedRepo, setSelectedRepo] = useState('');
 
-  const [fontsLoaded] = useFonts({
-    'SF-Pro-Display-Regular': require('./assets/fonts/SF-Pro-Display-Regular.otf'),
-    'SF-Pro-Display-Bold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
-  });
-
-  const search =async ()=> {
+  const search =async (searchQuery)=> {
     const url = `https://api.github.com/search/repositories?q=${searchQuery}&per_page=20`;
     try {
       const r = await axios.get(url,{
@@ -39,70 +31,25 @@ export default function App() {
   }
 
   return (
-      
-      <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
-
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={{ width: windowWidth, aspectRatio }}>
-            <Logo width="100%" 
-            height="100%" 
-            viewBox={`0 0 ${originalWidth} ${originalHeight}`}/>
-          </View>
-          <Text style={{fontFamily: 'SF-Pro-Display-Bold', ...styles.title}}>GitHub Repo Search</Text>
-        </View>
-
-        {/* Search bar */}
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-
-        <Button title={'Seach'}
-        onPress={search}/>
-
-        {/* List of results */}
-        <FlatList
-        style={styles.cardList}
-        data={repos}
-        renderItem={({item}) => (
-          <RepoCard
-          repo={item}
-          key={item.id}
-          onPress={() => console.log(item.name)}/>
-        )}
-        />
-      </LinearGradient>
+      <NavigationContainer>
+        <Context.Provider value={{
+          repos: repos,
+          search: search
+        }}>
+      <Stack.Navigator>
+        <Stack.Screen name="Search" component={Search}/>
+        <Stack.Screen name="Repo" component={Repo}/>
+      </Stack.Navigator>
+      </Context.Provider>
+      </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  header: {
-    marginTop: 75,
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    maxHeight: 50
-  },
-  logo: {
-    width: 98,
-    height: 96
-  },
-  title: {
-    fontWeight: "700",
-    marginLeft: 10
-  },
-  linearGradient: {
-    alignItems: "center",
-    width: "100%",
-    height: "100%",
-    paddingHorizontal: 30
-  },
-  cardList: {
-    width: "100%",
-    paddingBottom: 60
-  }  
-});
-
 // Navigate to second page with details
 // Navigate back to main page with back arrow
+
+// Create context provider
+// Get the list at the root and pass it down via context
 
 // Collapse the header on scroll
 // Debounce on search input update and call endpoint from input changes
