@@ -101,10 +101,11 @@ const styles = StyleSheet.create({
   }  
 });
 
-// Update fonts
-// Highlight search term in titles and descriptions in results page
-// Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
-// Collapse the header on scroll
-// Debounce on search input update
 // Navigate to second page with details
 // Navigate back to main page with back arrow
+
+// Collapse the header on scroll
+// Debounce on search input update and call endpoint from input changes
+
+// Highlight search term in titles and descriptions in results page
+// Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
