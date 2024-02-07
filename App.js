@@ -1,6 +1,8 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import Logo from './assets/github-mark.svg'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
 export default function App() {
 
@@ -8,6 +10,32 @@ export default function App() {
   const originalHeight = 96;
   const aspectRatio = originalWidth / originalHeight;
   const windowWidth = 50;
+
+  const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
+  const [repos, setRepos] = useState([]);
+
+  useEffect(() => {
+    console.log(searchQuery);
+  },[searchQuery])
+
+  const search =async ()=> {
+    const url = `https://api.github.com/search/repositories?q=${searchQuery}&per_page=20`;
+    console.log(`fetching: ${searchQuery}`);
+    try {
+      const r = await axios.get(url,{
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${process.env.EXPO_PUBLIC_GITHUB_KEY}`,
+          "X-GitHub-Api-Version": '2022-11-28',
+        }
+      });
+      console.log('done');
+      console.log(r.data);
+      setRepos(r.data.items);
+    } catch (err) {
+      console.log(JSON.stringify(err));
+    }
+  }
 
   return (
       <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
@@ -23,10 +51,18 @@ export default function App() {
 
         {/* Search bar */}
         <View style={styles.searchContainer}>
-          <TextInput placeholder='Search' style={styles.searchInput}/>
+          <TextInput placeholder='Search' style={styles.searchInput} onChangeText={text => setSearchQuery(text)} value={searchQuery}/>
         </View>
 
+        <Button title={'Seach'}
+        onPress={search}/>
+
         {/* List of results */}
+        {repos.map((item,index) => (
+          <View>
+            <Text>{item.name}</Text>
+          </View>
+        ))}
       </LinearGradient>
   );
 }
@@ -66,3 +102,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+
+// Make the call to search
+// Debounce on search input update
+// Display the list of results
+// Navigate to second page with details
