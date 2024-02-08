@@ -14,12 +14,17 @@ export default function App() {
   const [repos, setRepos] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState('');
   const [languages, setLanguages] = useState([]);
+  const [highlight, setHighlight] = useState('');
 
   useEffect(() => {
     setLanguages([]);
     if(selectedRepo !== '')
       getLanguages();
   },[selectedRepo])
+
+  useEffect(() => {
+    console.log(highlight);
+  },[highlight])
 
   const search =async (searchQuery)=> {
     const url = `https://api.github.com/search/repositories?q=${searchQuery}&per_page=20`;
@@ -31,6 +36,7 @@ export default function App() {
           "X-GitHub-Api-Version": '2022-11-28',
         }
       });
+      setHighlight(searchQuery);
       setRepos(r.data.items);
     } catch (err) {
       console.log(JSON.stringify(err, null, 2));
@@ -67,7 +73,8 @@ export default function App() {
           search: search,
           selectedRepo: selectedRepo,
           setSelectedRepo: setSelectedRepo,
-          languages: languages
+          languages: languages,
+          highlight: highlight
         }}>
       <Stack.Navigator>
         <Stack.Screen name="Search" component={Search}/>

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 import { useFonts } from 'expo-font'
 import { Context } from '../util/Context'
+import splitTextForHighlight from '../util/splitTextForHighlight'
 
 export default function RepoCard({
     repo,
@@ -14,8 +15,14 @@ export default function RepoCard({
         'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
         'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
     });
+    const bold = 'SF-Pro-Display-Bold';
+    const regular = 'SF-Pro-Display-Regular';
 
     if(!fontsLoaded) return null;
+
+    const split_name = splitTextForHighlight({text: repo.full_name, highlight: context.highlight});
+    const split_description = splitTextForHighlight({text: repo.description, highlight: context.highlight});
+    const regex = new RegExp(`(${context.highlight})`, 'gi');
 
     return <TouchableWithoutFeedback onPress={() => {
         context.setSelectedRepo(repo.id);
@@ -24,10 +31,26 @@ export default function RepoCard({
     <View style={styles.card}>
         <View style={styles.cardTopRow}>
             <Image style={styles.avatar} source={{uri: repo.owner.avatar_url}}/>
-            <Text style={styles.name}>{repo.full_name}</Text>
+
+            {/* full name of repo, w/search query highlighted */}
+            <Text style={styles.name}>
+                {split_name.map((item,index) => (
+                    <Text style={{
+                        fontFamily: regex.test(item) ? bold : regular,
+                        ...styles.name
+                    }}>{item}</Text>
+                ))}
+            </Text>
         </View>
+
+        {/* description of repo, w/search query highlighted */}
         <Text style={styles.description}>
-            {repo.description}
+            {split_description.map((item,index) => (
+                <Text style={{
+                    fontFamily: regex.test(item) ? bold : regular,
+                    ...styles.description
+                }}>{item}</Text>
+            ))}
         </Text>
     </View>
     </TouchableWithoutFeedback>
@@ -57,12 +80,10 @@ const styles = StyleSheet.create({
     },
     description: {
         marginTop: 12,
-        fontFamily: 'SF-Pro-Display-Regular',
         fontSize: 14
     },
     name: {
         marginLeft: 11,
-        fontFamily: 'SF-Pro-Display-Regular',
         fontSize: 14
     },  
     avatar: {

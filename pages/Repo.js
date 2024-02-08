@@ -8,6 +8,7 @@ import Fork from '../assets/repo-forked.svg'
 import Eye from '../assets/eye.svg'
 import Back from '../assets/arrow-left.svg'
 import { useFonts } from 'expo-font'
+import splitTextForHighlight from '../util/splitTextForHighlight'
 
 export default function Repo({ navigation }) {
 
@@ -23,7 +24,14 @@ export default function Repo({ navigation }) {
         'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
         'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
     });
+    const bold = 'SF-Pro-Display-Bold';
+    const regular = 'SF-Pro-Display-Regular';
+
     if(!fontsLoaded) return null;
+
+    const split_name = splitTextForHighlight({text: repo.full_name, highlight: context.highlight});
+    const split_description = splitTextForHighlight({text: repo.description, highlight: context.highlight});
+    const regex = new RegExp(`(${context.highlight})`, 'gi');
 
     return <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
@@ -33,7 +41,15 @@ export default function Repo({ navigation }) {
             <Image source={{uri: repo.owner.avatar_url}} 
             style={styles.avatar}/>
 
-            <Text style={styles.title}>{repo.full_name}</Text>
+            {/* full name of repo, w/search query highlighted */}
+            <Text style={styles.title}>
+                {split_name.map((item,index) => (
+                    <Text style={{
+                        fontFamily: regex.test(item) ? bold : regular,
+                        ...styles.title
+                    }}>{item}</Text>
+                ))}
+            </Text>
 
             <View style={styles.statsRow}>
 
@@ -59,8 +75,16 @@ export default function Repo({ navigation }) {
 
         <View style={styles.break}/>
 
+        {/* description of repo, w/search query highlighted */}
         <View style={styles.section}>
-            <Text style={styles.description}>{repo.description}</Text>
+            <Text style={styles.description}>
+                {split_description.map((item,index) => (
+                    <Text style={{
+                        fontFamily: regex.test(item) ? bold : regular,
+                        ...styles.description
+                    }}>{item}</Text>
+                ))}
+            </Text>
 
             <Text style={styles.languageHeader}>Languages</Text>
 
@@ -103,8 +127,7 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 20,
-        fontSize: 18,
-        fontFamily: 'SF-Pro-Display-Regular'
+        fontSize: 18
     },
     statsRow: {
         flexDirection: "row"
