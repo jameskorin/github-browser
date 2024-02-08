@@ -84,8 +84,3 @@ export default function App() {
 }
 
 // Fix expo issue and get the app running on device
-
-
-// Wrap all svg buttons with TouchableWithoutFeedback
-  // Clear search
-  // Back arrow
