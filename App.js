@@ -87,10 +87,6 @@ export default function App() {
   // Scroll to top of list on list change
   // Wrap all svg buttons with TouchableWithoutFeedback
 
-// Fix font import issue
-// Get all font weights correct
-// Get all font sizes correct
-
 // Highlight search term in titles and descriptions in results page
 // Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
 
