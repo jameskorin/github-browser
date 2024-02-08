@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Image, View } from 'react-native'
+import { StyleSheet, Text, Image, View, TouchableOpacity, Linking } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import { useContext } from 'react'
 import { Context } from '../App'
@@ -59,6 +59,12 @@ export default function Repo() {
             </View>
         </View>
 
+        <View style={styles.repoLinkContainer}>
+        <TouchableOpacity style={styles.repoLink} onPress={() => Linking.openURL(repo.html_url)}>
+            <Text style={styles.repoLinkText}>Go to Repo</Text>
+        </TouchableOpacity>
+        </View>
+
     </LinearGradient>
 }
 
@@ -114,5 +120,26 @@ const styles = StyleSheet.create({
     },
     language: {
         marginBottom: 5
+    },
+    repoLinkContainer: {
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+        bottom: 48,
+        width: "100%",
+        paddingHorizontal: 30
+    },
+    repoLink: {
+        width: "100%",
+        backgroundColor: "#1F6FEB",
+        marginHorizontal: 30,
+        borderRadius: "100%",
+        paddingVertical: 16,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    repoLinkText: {
+        color: "#FFFFFF",
+        lineHeight: 16
     }
   });
