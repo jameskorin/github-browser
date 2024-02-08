@@ -3,8 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Search from './pages/Search'
 import Repo from './pages/Repo'
 import axios from 'axios'
-import { useState, createContext, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Context } from './util/Context'
+import { SafeAreaView } from 'react-native'
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,6 @@ export default function App() {
   const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
-    console.log('refreshed');
     setLanguages([]);
     if(selectedRepo !== '')
       getLanguages();
@@ -58,7 +58,9 @@ export default function App() {
   }
 
   return (
-    
+    <>
+    <SafeAreaView style={{ flex:0, backgroundColor: '#e2dcee' }} />
+    <SafeAreaView style={{flex: 1, backgroundColor: '#f1f1f1', backfaceVisibility: "hidden"}}>
       <NavigationContainer>
         <Context.Provider value={{
           repos: repos,
@@ -73,12 +75,15 @@ export default function App() {
       </Stack.Navigator>
       </Context.Provider>
     </NavigationContainer>
+    </SafeAreaView>
+    </>
   );
 }
 
 // Navigation header
   // Navigate back to main page with back arrow
-  // Get rid of that hokey ass header from the navigation wrapper
+  // Get safe view working
+  // Give all pages a nice little margin at the top
 
 // Search page
   // Collapse the header on scroll

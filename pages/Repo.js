@@ -6,6 +6,7 @@ import truncateNumber from '../util/truncateNumber'
 import Star from '../assets/star.svg'
 import Fork from '../assets/repo-forked.svg'
 import Eye from '../assets/eye.svg'
+import Back from '../assets/arrow-left.svg'
 
 export default function Repo({ navigation }) {
 
@@ -16,8 +17,10 @@ export default function Repo({ navigation }) {
     if(context.selectedRepo === '') return null;
 
     const repo = context.repos.find(e => e.id == context.selectedRepo);
-    console.log(JSON.stringify(repo, null, 2));
+
     return <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
+
+        <Back onPress={() => navigation.goBack()} style={styles.backArrow}/>
 
         <View style={styles.section}>
             <Image source={{uri: repo.owner.avatar_url}} 
@@ -75,6 +78,7 @@ const styles = StyleSheet.create({
       alignItems: "left",
       width: "100%",
       height: "100%",
+      paddingVertical: 20
     },
     section: {
         paddingHorizontal: 30
@@ -143,5 +147,9 @@ const styles = StyleSheet.create({
     repoLinkText: {
         color: "#FFFFFF",
         lineHeight: 16
+    },
+    backArrow: {
+        marginLeft: 30,
+        marginBottom: 18
     }
   });

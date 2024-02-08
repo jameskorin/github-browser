@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    paddingVertical: 20
   },
   cardList: {
     width: "100%",

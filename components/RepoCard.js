@@ -19,7 +19,7 @@ export default function RepoCard({
         context.setSelectedRepo(repo.id);
         navigate('Repo');
     }}>
-    <View style={styles.card} onPress={() => console.log(repo.name)}>
+    <View style={styles.card}>
         <View style={styles.cardTopRow}>
             <Image style={styles.avatar} source={{uri: repo.owner.avatar_url}}/>
             <Text style={styles.name}>{repo.full_name}</Text>
