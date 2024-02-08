@@ -1,7 +1,7 @@
-import { Button, FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import Logo from '../assets/github-mark.svg'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
 import RepoCard from '../components/RepoCard'
 import SearchBar from '../components/SearchBar'
 import { useFonts } from 'expo-font'
@@ -10,6 +10,8 @@ import { Context } from '../util/Context'
 export default function Search({ navigation }) {
 
     navigation.setOptions({ headerShown: false });
+
+    const scrollRef = useRef();
 
     const originalWidth = 98;
     const originalHeight = 96;
@@ -36,6 +38,17 @@ export default function Search({ navigation }) {
         context.search(debouncedSearchQuery);
     }, [debouncedSearchQuery]);
 
+    useEffect(() => {
+      scrollToTop();
+    },[context.repos])
+
+    const scrollToTop = () => {
+      scrollRef.current?.scrollTo({
+        y: 0,
+        animated: true,
+      });
+    }
+
     const handleScroll =(event)=> {
       const scrollPosition = event.nativeEvent.contentOffset.y;
       if (scrollPosition > 62) {
@@ -54,7 +67,7 @@ export default function Search({ navigation }) {
 
     return (<LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
-        <ScrollView stickyHeaderIndices={[1]} showsVerticalScrollIndicator={false}
+        <ScrollView ref={scrollRef} stickyHeaderIndices={[1]} showsVerticalScrollIndicator={false}
         style={styles.scrollView} onScroll={handleScroll}
         scrollEventThrottle={16}>
 

@@ -86,7 +86,6 @@ export default function App() {
 // Fix expo issue and get the app running on device
 
 // Search page
-  // Truncate long full names on cards in list
   // Scroll to top of list on list change
   // Wrap all svg buttons with TouchableWithoutFeedback
 

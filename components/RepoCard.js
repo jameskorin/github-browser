@@ -22,7 +22,6 @@ export default function RepoCard({
     if(!fontsLoaded) return null;
 
     const name_max_length = (Dimensions.get('window').width - 116) * 0.1375;
-    console.log(name_max_length);
     const split_name = splitTextForHighlight({text: truncateText(repo.full_name, name_max_length), highlight: context.highlight});
     const split_description = splitTextForHighlight({text: repo.description, highlight: context.highlight});
     const regex = new RegExp(`(${context.highlight})`, 'gi');
