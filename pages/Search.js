@@ -9,7 +9,7 @@ import { Context } from '../util/Context'
 
 export default function Search({ navigation }) {
 
-    navigation.setOptions({ headerShown: false });
+    
 
     const scrollRef = useRef();
 
@@ -22,6 +22,10 @@ export default function Search({ navigation }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
     const [isSticky, setIsSticky] = useState(false);
+
+    useEffect(() => {
+      navigation.setOptions({ headerShown: false });
+    },[])
 
     useEffect(() => {
       const timerId = setTimeout(() => {
@@ -64,6 +68,8 @@ export default function Search({ navigation }) {
     });
 
     if(!fontsLoaded) return null;
+
+    
 
     return (<LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 

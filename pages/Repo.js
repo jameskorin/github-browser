@@ -12,9 +12,11 @@ import splitTextForHighlight from '../util/splitTextForHighlight'
 
 export default function Repo({ navigation }) {
 
-    navigation.setOptions({ headerShown: false });
-
     const context = useContext(Context);
+
+    useEffect(() => {
+        navigation.setOptions({ headerShown: false });
+    },[])
 
     if(context.selectedRepo === '') return null;
 
