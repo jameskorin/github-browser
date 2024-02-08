@@ -1,6 +1,6 @@
 import { StyleSheet, Text, Image, View, TouchableOpacity, Linking, TouchableHighlight } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Context } from '../util/Context'
 import truncateNumber from '../util/truncateNumber'
 import Star from '../assets/star.svg'
