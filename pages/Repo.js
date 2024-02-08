@@ -54,7 +54,7 @@ export default function Repo() {
 
             <View style={styles.languageList}>
                 {context.languages.map((item, index) => (
-                    <Text key={item}>{item}</Text>
+                    <Text key={item} style={styles.language}>{item}</Text>
                 ))}
             </View>
         </View>
@@ -111,5 +111,8 @@ const styles = StyleSheet.create({
         fontWeight: 700,
         marginTop: 24,
         marginBottom: 16
+    },
+    language: {
+        marginBottom: 5
     }
   });
