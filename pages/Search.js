@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import Logo from '../assets/github-mark.svg'
 import { useState, useContext, useEffect, useRef } from 'react'
@@ -8,8 +8,6 @@ import { useFonts } from 'expo-font'
 import { Context } from '../util/Context'
 
 export default function Search({ navigation }) {
-
-    
 
     const scrollRef = useRef();
 
@@ -60,6 +58,7 @@ export default function Search({ navigation }) {
       } else {
         setIsSticky(false);
       }
+      Keyboard.dismiss();
     }
 
     const [fontsLoaded] = useFonts({
@@ -69,12 +68,13 @@ export default function Search({ navigation }) {
 
     if(!fontsLoaded) return null;
 
-    
-
     return (<LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
-        <ScrollView ref={scrollRef} stickyHeaderIndices={[1]} showsVerticalScrollIndicator={false}
-        style={styles.scrollView} onScroll={handleScroll}
+        <ScrollView ref={scrollRef} 
+        stickyHeaderIndices={[1]} 
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollView} 
+        onScroll={handleScroll}
         scrollEventThrottle={16}>
 
           {/* Header */}
@@ -89,7 +89,9 @@ export default function Search({ navigation }) {
           </Text>
         </View>
 
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} isSticky={isSticky}/>
+          <SearchBar searchQuery={searchQuery} 
+          setSearchQuery={setSearchQuery} 
+          isSticky={isSticky}/>
 
           {context.repos.map((item, index) => (
             <RepoCard

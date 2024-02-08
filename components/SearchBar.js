@@ -2,15 +2,12 @@ import { StyleSheet, TextInput, TouchableHighlight, View } from 'react-native'
 import SearchIcon from '../assets/search.svg'
 import ClearSearchIcon from '../assets/x.svg'
 import { useFonts } from 'expo-font'
-import { useRef } from 'react'
 
 export default function SearchBar({
     searchQuery,
     setSearchQuery,
     isSticky
 }) {
-
-    const inputRef = useRef();
 
     const [fontsLoaded] = useFonts({
         'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
@@ -24,7 +21,7 @@ export default function SearchBar({
 
         <SearchIcon style={styles.searchIcon}/>
 
-        <TextInput placeholder='Search' ref={inputRef}
+        <TextInput placeholder='Search'
         style={{fontFamily: 'SF-Pro-Display-Regular', ...styles.searchInput}} 
         onChangeText={text => setSearchQuery(text)} 
         value={searchQuery}/>
