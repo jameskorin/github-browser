@@ -18,10 +18,22 @@ export default function Search({ navigation }) {
 
     const context = useContext(Context);
     const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
+    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
     useEffect(() => {
-      context.search(searchQuery);
-    },[searchQuery])
+      const timerId = setTimeout(() => {
+        setDebouncedSearchQuery(searchQuery);
+      }, 500);
+
+      return () => {
+        clearTimeout(timerId);
+      };
+    }, [searchQuery]);
+
+    useEffect(() => {
+      if (debouncedSearchQuery)
+        context.search(debouncedSearchQuery);
+    }, [debouncedSearchQuery]);
 
     // const [fontsLoaded] = useFonts({
     //     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
