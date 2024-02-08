@@ -4,11 +4,9 @@ import Search from './pages/Search'
 import Repo from './pages/Repo'
 import axios from 'axios'
 import { useState, createContext, useEffect } from 'react'
-import NavHeader from './components/NavHeader'
+import { Context } from './util/Context'
 
 const Stack = createNativeStackNavigator();
-
-export const Context = createContext({ repos: [], search: null });
 
 export default function App() {
 
@@ -17,6 +15,7 @@ export default function App() {
   const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
+    console.log('refreshed');
     setLanguages([]);
     if(selectedRepo !== '')
       getLanguages();
@@ -59,6 +58,7 @@ export default function App() {
   }
 
   return (
+    
       <NavigationContainer>
         <Context.Provider value={{
           repos: repos,
@@ -68,13 +68,11 @@ export default function App() {
           languages: languages
         }}>
       <Stack.Navigator>
-        <Stack.Screen name="Search" component={Search}
-        options={{ headerTitle: (props) => <NavHeader {...props} /> }}/>
-        <Stack.Screen name="Repo" component={Repo}
-        options={{ headerTitle: (props) => <NavHeader {...props} /> }}/>
+        <Stack.Screen name="Search" component={Search}/>
+        <Stack.Screen name="Repo" component={Repo}/>
       </Stack.Navigator>
       </Context.Provider>
-      </NavigationContainer>
+    </NavigationContainer>
   );
 }
 

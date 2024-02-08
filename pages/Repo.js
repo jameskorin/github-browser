@@ -1,13 +1,15 @@
 import { StyleSheet, Text, Image, View, TouchableOpacity, Linking } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import { useContext } from 'react'
-import { Context } from '../App'
+import { Context } from '../util/Context'
 import truncateNumber from '../util/truncateNumber'
 import Star from '../assets/star.svg'
 import Fork from '../assets/repo-forked.svg'
 import Eye from '../assets/eye.svg'
 
-export default function Repo() {
+export default function Repo({ navigation }) {
+
+    navigation.setOptions({ headerShown: false });
 
     const context = useContext(Context);
 
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     avatar: {
         width: 78,
         height: 78,
-        borderRadius: "100%"
+        borderRadius: 1000
     },
     title: {
         marginTop: 20,
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: "#1F6FEB",
         marginHorizontal: 30,
-        borderRadius: "100%",
+        borderRadius: 1000,
         paddingVertical: 16,
         alignItems: 'center',
         justifyContent: 'center'

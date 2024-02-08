@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
-import { useFonts } from 'expo-font'
-import { Context } from '../App'
+// import { useFonts } from 'expo-font'
+import { Context } from '../util/Context'
 
 export default function RepoCard({
     repo,
@@ -10,10 +10,10 @@ export default function RepoCard({
 
     const context = useContext(Context);
 
-    const [fontsLoaded] = useFonts({
-        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-    });
+    // const [fontsLoaded] = useFonts({
+    //     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+    //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
+    // });
 
     return <TouchableWithoutFeedback onPress={() => {
         context.setSelectedRepo(repo.id);

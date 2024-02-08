@@ -1,17 +1,17 @@
 import { StyleSheet, TextInput, View } from 'react-native'
 import SearchIcon from '../assets/search.svg'
 import ClearSearchIcon from '../assets/x.svg'
-import { useFonts } from 'expo-font'
+// import { useFonts } from 'expo-font'
 
 export default function SearchBar({
     searchQuery,
     setSearchQuery
 }) {
 
-    const [fontsLoaded] = useFonts({
-        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-    });
+    // const [fontsLoaded] = useFonts({
+    //     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+    //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
+    // });
 
     return <View style={styles.searchContainer}>
 

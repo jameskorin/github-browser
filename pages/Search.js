@@ -4,26 +4,30 @@ import Logo from '../assets/github-mark.svg'
 import { useState, useContext } from 'react'
 import RepoCard from '../components/RepoCard'
 import SearchBar from '../components/SearchBar'
-import { useFonts } from 'expo-font'
-import { Context } from '../App'
+// import { useFonts } from 'expo-font'
+import { Context } from '../util/Context'
 
 export default function Search({ navigation }) {
 
-  const originalWidth = 98;
-  const originalHeight = 96;
-  const aspectRatio = originalWidth / originalHeight;
-  const windowWidth = 40;
+    navigation.setOptions({ headerShown: false });
 
-  const context = useContext(Context);
-  const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
+    const originalWidth = 98;
+    const originalHeight = 96;
+    const aspectRatio = originalWidth / originalHeight;
+    const windowWidth = 40;
 
-  const [fontsLoaded] = useFonts({
-    'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-    'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-  });
+    const context = useContext(Context);
+    const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
+
+    // const [fontsLoaded] = useFonts({
+    //     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+    //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
+    // });
   
-  return (
-      <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
+    // if(!fontsLoaded) return null;
+
+    return (
+        <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
         {/* Header */}
         <View style={styles.header}>
@@ -52,7 +56,7 @@ export default function Search({ navigation }) {
           navigate={navigation.navigate}/>
         )}/>
       </LinearGradient>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
