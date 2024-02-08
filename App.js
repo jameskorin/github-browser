@@ -83,4 +83,6 @@ export default function App() {
   );
 }
 
-// Fix expo issue and get the app running on device
+// On scroll, dismiss keyboard
+// Tap anywhere on the search bar to focus the input
+// Focus input on clear
