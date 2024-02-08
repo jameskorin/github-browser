@@ -31,7 +31,8 @@ export default function SearchBar({
 const styles = StyleSheet.create({
     outer: {
         width: "100%",
-        paddingHorizontal: 30
+        paddingHorizontal: 30,
+        paddingBottom: 16
     },
     searchContainer: {
         backgroundColor: "#edebf4",
