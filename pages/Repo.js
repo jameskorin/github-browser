@@ -44,7 +44,7 @@ export default function Repo({ navigation }) {
             {/* full name of repo, w/search query highlighted */}
             <Text style={styles.title}>
                 {split_name.map((item,index) => (
-                    <Text style={{
+                    <Text key={`name_${item}_${index}`} style={{
                         fontFamily: regex.test(item) ? bold : regular,
                         ...styles.title
                     }}>{item}</Text>
@@ -79,7 +79,7 @@ export default function Repo({ navigation }) {
         <View style={styles.section}>
             <Text style={styles.description}>
                 {split_description.map((item,index) => (
-                    <Text style={{
+                    <Text key={`description_${item}_${index}`} style={{
                         fontFamily: regex.test(item) ? bold : regular,
                         ...styles.description
                     }}>{item}</Text>
@@ -90,7 +90,7 @@ export default function Repo({ navigation }) {
 
             <View style={styles.languageList}>
                 {context.languages.map((item, index) => (
-                    <Text key={item} style={styles.language}>{item}</Text>
+                    <Text key={`language_${item}_${index}`} style={styles.language}>{item}</Text>
                 ))}
             </View>
         </View>

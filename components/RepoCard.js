@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, Dimensions } from 'react-native'
 import { useFonts } from 'expo-font'
 import { Context } from '../util/Context'
 import splitTextForHighlight from '../util/splitTextForHighlight'
+import truncateText from '../util/truncateText'
 
 export default function RepoCard({
     repo,
@@ -20,7 +21,9 @@ export default function RepoCard({
 
     if(!fontsLoaded) return null;
 
-    const split_name = splitTextForHighlight({text: repo.full_name, highlight: context.highlight});
+    const name_max_length = (Dimensions.get('window').width - 116) * 0.1375;
+    console.log(name_max_length);
+    const split_name = splitTextForHighlight({text: truncateText(repo.full_name, name_max_length), highlight: context.highlight});
     const split_description = splitTextForHighlight({text: repo.description, highlight: context.highlight});
     const regex = new RegExp(`(${context.highlight})`, 'gi');
 
@@ -35,7 +38,7 @@ export default function RepoCard({
             {/* full name of repo, w/search query highlighted */}
             <Text style={styles.name}>
                 {split_name.map((item,index) => (
-                    <Text style={{
+                    <Text key={`name_${item}_${index}`} style={{
                         fontFamily: regex.test(item) ? bold : regular,
                         ...styles.name
                     }}>{item}</Text>
@@ -46,7 +49,7 @@ export default function RepoCard({
         {/* description of repo, w/search query highlighted */}
         <Text style={styles.description}>
             {split_description.map((item,index) => (
-                <Text style={{
+                <Text key={`description_${item}_${index}`} style={{
                     fontFamily: regex.test(item) ? bold : regular,
                     ...styles.description
                 }}>{item}</Text>
