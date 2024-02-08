@@ -5,7 +5,7 @@ import Repo from './pages/Repo'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Context } from './util/Context'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, View } from 'react-native'
 
 const Stack = createNativeStackNavigator();
 
@@ -60,7 +60,7 @@ export default function App() {
   return (
     <>
     <SafeAreaView style={{ flex:0, backgroundColor: '#e2dcee' }} />
-    <SafeAreaView style={{flex: 1, backgroundColor: '#f1f1f1', backfaceVisibility: "hidden"}}>
+    <View style={{flex: 1, backgroundColor: '#f1f1f1'}}>
       <NavigationContainer>
         <Context.Provider value={{
           repos: repos,
@@ -75,15 +75,12 @@ export default function App() {
       </Stack.Navigator>
       </Context.Provider>
     </NavigationContainer>
-    </SafeAreaView>
+    </View>
     </>
   );
 }
 
-// Navigation header
-  // Navigate back to main page with back arrow
-  // Get safe view working
-  // Give all pages a nice little margin at the top
+// Fix expo issue and get the app running on device
 
 // Search page
   // Collapse the header on scroll
@@ -91,8 +88,11 @@ export default function App() {
   // Add a chin to the bottom of the results page
   // Truncate long full names on cards in list
   // Scroll to top of list on list change
+  // Fix color on clear search button
+  // Wrap all svg buttons with TouchableWithoutFeedback
 
 // Fix font import issue
+// Get all font weights correct
 
 // Highlight search term in titles and descriptions in results page
 // Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)

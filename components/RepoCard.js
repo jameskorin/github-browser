@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
       marginTop: 16,
       shadowColor: "#FFFFFF",
       shadowOpacity: 0.1,
-      shadowOffset: 0
+      shadowOffset: 0,
+      marginHorizontal: 30
     },
     cardTopRow: {
       flexDirection: "row",

@@ -1,7 +1,7 @@
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
+import { Button, FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import Logo from '../assets/github-mark.svg'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import RepoCard from '../components/RepoCard'
 import SearchBar from '../components/SearchBar'
 // import { useFonts } from 'expo-font'
@@ -19,6 +19,10 @@ export default function Search({ navigation }) {
     const context = useContext(Context);
     const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
 
+    useEffect(() => {
+      context.search(searchQuery);
+    },[searchQuery])
+
     // const [fontsLoaded] = useFonts({
     //     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
     //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
@@ -29,42 +33,47 @@ export default function Search({ navigation }) {
     return (
         <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
-        {/* Header */}
+        <ScrollView stickyHeaderIndices={[1]} showsVerticalScrollIndicator={false}
+        style={styles.scrollView}>
+
+          {/* Header */}
         <View style={styles.header}>
           <View style={{ width: windowWidth, aspectRatio }}>
             <Logo width="100%" 
             height="100%" 
             viewBox={`0 0 ${originalWidth} ${originalHeight}`}/>
           </View>
-          <Text style={{fontFamily: 'SF-Pro-Display-Bold', ...styles.title}}>GitHub Repo Search</Text>
+          <Text style={{fontFamily: 'SF-Pro-Display-Bold', ...styles.title}}>
+            GitHub Repo Search
+          </Text>
         </View>
 
-        {/* Search bar */}
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
 
-        <Button title={'Seach'}
-        onPress={() => context.search(searchQuery)}/>
+          {context.repos.map((item, index) => (
+            <RepoCard
+            repo={item}
+            key={item.id}
+            navigate={navigation.navigate}/>
+          ))}
 
-        {/* List of results */}
-        <FlatList
-        style={styles.cardList}
-        data={context.repos}
-        renderItem={({item}) => (
-          <RepoCard
-          repo={item}
-          key={item.id}
-          navigate={navigation.navigate}/>
-        )}/>
+        </ScrollView>
       </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    width: "100%",
+    paddingBottom: 60
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    maxHeight: 50
+    maxHeight: 50,
+    paddingHorizontal: 30,
+    marginBottom: 24
   },
   logo: {
     width: 98,
@@ -78,11 +87,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
-    paddingHorizontal: 30,
     paddingVertical: 20
-  },
-  cardList: {
-    width: "100%",
-    paddingBottom: 60
   }  
 });

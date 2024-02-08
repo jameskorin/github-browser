@@ -13,7 +13,8 @@ export default function SearchBar({
     //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
     // });
 
-    return <View style={styles.searchContainer}>
+    return <View style={styles.outer}>
+        <View style={styles.searchContainer}>
 
         <SearchIcon/>
 
@@ -22,24 +23,32 @@ export default function SearchBar({
         onChangeText={text => setSearchQuery(text)} 
         value={searchQuery}/>
 
-        <ClearSearchIcon width="18px" height="18px" onPress={() => setSearchQuery('')}/>
+        <ClearSearchIcon style={styles.clear} onPress={() => setSearchQuery('')}/>
+    </View>
     </View>;
 }
 
 const styles = StyleSheet.create({
+    outer: {
+        width: "100%",
+        paddingHorizontal: 30
+    },
     searchContainer: {
         backgroundColor: "#edebf4",
         paddingHorizontal: 14,
         paddingVertical: 14,
         borderRadius: 9,
         color: "#000000",
-        marginTop: 20,
-        marginHorizontal: 30,
         flexDirection: "row",
         alignItems: "center"
     },
     searchInput: {
-      width: "100%",
       marginLeft: 14
-    } 
+    },
+    clear: {
+        width: 18,
+        height: 18,
+        position: "absolute",
+        right: 14
+    }
   });
