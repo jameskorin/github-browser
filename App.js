@@ -13,6 +13,13 @@ export default function App() {
 
   const [repos, setRepos] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState('');
+  const [languages, setLanguages] = useState([]);
+
+  useEffect(() => {
+    setLanguages([]);
+    if(selectedRepo !== '')
+      getLanguages();
+  },[selectedRepo])
 
   const search =async (searchQuery)=> {
     const url = `https://api.github.com/search/repositories?q=${searchQuery}&per_page=20`;
@@ -30,13 +37,34 @@ export default function App() {
     }
   }
 
+  const getLanguages =async ()=> {
+    const repo = repos.find(e => e.id === selectedRepo);
+    const url = `https://api.github.com/repos/${repo.full_name}/languages`;
+    try {
+      const r = await axios.get(url, {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${process.env.EXPO_PUBLIC_GITHUB_KEY}`,
+          "X-GitHub-Api-Version": '2022-11-28',
+        }
+      });
+      let keysToStringArray = Object.entries(r.data).map(entry => entry[0]);
+      if(keysToStringArray.length > 6)
+        keysToStringArray = keysToStringArray.slice(0,6).concat(['Other']);
+      setLanguages(keysToStringArray);
+    } catch (err) {
+      console.log(JSON.stringify(err, null, 2));
+    }
+  }
+
   return (
       <NavigationContainer>
         <Context.Provider value={{
           repos: repos,
           search: search,
           selectedRepo: selectedRepo,
-          setSelectedRepo: setSelectedRepo
+          setSelectedRepo: setSelectedRepo,
+          languages: languages
         }}>
       <Stack.Navigator>
         <Stack.Screen name="Search" component={Search}/>
@@ -47,7 +75,6 @@ export default function App() {
   );
 }
 
-// Navigate to second page with details
 // Navigate back to main page with back arrow
 
 // Get rid of that hokey ass header from the navigation wrapper

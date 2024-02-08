@@ -50,9 +50,13 @@ export default function Repo() {
         <View style={styles.section}>
             <Text>{repo.description}</Text>
 
-            <Text>Languages</Text>
+            <Text style={styles.languageHeader}>Languages</Text>
 
-            <Text>{repo.language}</Text>
+            <View style={styles.languageList}>
+                {context.languages.map((item, index) => (
+                    <Text key={item}>{item}</Text>
+                ))}
+            </View>
         </View>
 
     </LinearGradient>
@@ -99,5 +103,13 @@ const styles = StyleSheet.create({
         width: 12,
         height: 12,
         marginRight: 6
+    },
+    languageList: {
+        flexDirection: "column"
+    },
+    languageHeader: {
+        fontWeight: 700,
+        marginTop: 24,
+        marginBottom: 16
     }
   });
