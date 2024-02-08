@@ -22,10 +22,6 @@ export default function App() {
       getLanguages();
   },[selectedRepo])
 
-  useEffect(() => {
-    console.log(highlight);
-  },[highlight])
-
   const search =async (searchQuery)=> {
     const url = `https://api.github.com/search/repositories?q=${searchQuery}&per_page=20`;
     try {
@@ -94,7 +90,6 @@ export default function App() {
   // Scroll to top of list on list change
   // Wrap all svg buttons with TouchableWithoutFeedback
 
-// Highlight search term in titles and descriptions in results page
 // Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
 
 // Check UI scaling on all device resolutions
