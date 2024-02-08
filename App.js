@@ -4,6 +4,7 @@ import Search from './pages/Search'
 import Repo from './pages/Repo'
 import axios from 'axios'
 import { useState, createContext, useEffect } from 'react'
+import NavHeader from './components/NavHeader'
 
 const Stack = createNativeStackNavigator();
 
@@ -67,24 +68,28 @@ export default function App() {
           languages: languages
         }}>
       <Stack.Navigator>
-        <Stack.Screen name="Search" component={Search}/>
-        <Stack.Screen name="Repo" component={Repo}/>
+        <Stack.Screen name="Search" component={Search}
+        options={{ headerTitle: (props) => <NavHeader {...props} /> }}/>
+        <Stack.Screen name="Repo" component={Repo}
+        options={{ headerTitle: (props) => <NavHeader {...props} /> }}/>
       </Stack.Navigator>
       </Context.Provider>
       </NavigationContainer>
   );
 }
 
-// Navigate back to main page with back arrow
+// Navigation header
+  // Navigate back to main page with back arrow
+  // Get rid of that hokey ass header from the navigation wrapper
 
-// Get rid of that hokey ass header from the navigation wrapper
-
-// Collapse the header on scroll
-// Debounce on search input update and call endpoint from input changes
+// Search page
+  // Collapse the header on scroll
+  // Debounce on search input update and call endpoint from input changes
+  // Add a chin to the bottom of the results page
+  // Truncate long full names on cards in list
+  // Scroll to top of list on list change
 
 // Fix font import issue
-
-// Truncate long full names on cards in list
 
 // Highlight search term in titles and descriptions in results page
 // Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
