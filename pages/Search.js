@@ -4,7 +4,6 @@ import Logo from '../assets/github-mark.svg'
 import { useState, useContext, useEffect, useRef } from 'react'
 import RepoCard from '../components/RepoCard'
 import SearchBar from '../components/SearchBar'
-import { useFonts } from 'expo-font'
 import { Context } from '../util/Context'
 
 export default function Search({ navigation }) {
@@ -60,13 +59,6 @@ export default function Search({ navigation }) {
       }
       Keyboard.dismiss();
     }
-
-    const [fontsLoaded] = useFonts({
-        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-    });
-
-    if(!fontsLoaded) return null;
 
     return (<LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 

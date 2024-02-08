@@ -1,20 +1,12 @@
 import { StyleSheet, TextInput, TouchableHighlight, View } from 'react-native'
 import SearchIcon from '../assets/search.svg'
 import ClearSearchIcon from '../assets/x.svg'
-import { useFonts } from 'expo-font'
 
 export default function SearchBar({
     searchQuery,
     setSearchQuery,
     isSticky
 }) {
-
-    const [fontsLoaded] = useFonts({
-        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-    });
-
-    if(!fontsLoaded) return null;
 
     return <View style={[styles.outer, isSticky && styles.sticky]}>
         <View style={styles.searchContainer}>

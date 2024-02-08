@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, Dimensions } from 'react-native'
-import { useFonts } from 'expo-font'
 import { Context } from '../util/Context'
 import splitTextForHighlight from '../util/splitTextForHighlight'
 import truncateText from '../util/truncateText'
@@ -11,16 +10,8 @@ export default function RepoCard({
 }) {
 
     const context = useContext(Context);
-
-    const [fontsLoaded] = useFonts({
-        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-    });
     const bold = 'SF-Pro-Display-Bold';
     const regular = 'SF-Pro-Display-Regular';
-
-    if(!fontsLoaded) return null;
-
     const name_max_length = (Dimensions.get('window').width - 116) * 0.1375;
     const split_name = splitTextForHighlight({text: truncateText(repo.full_name, name_max_length), highlight: context.highlight});
     const split_description = splitTextForHighlight({text: repo.description, highlight: context.highlight});

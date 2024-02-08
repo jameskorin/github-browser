@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Context } from './util/Context'
 import { SafeAreaView, View } from 'react-native'
+import { useFonts } from 'expo-font'
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,13 @@ export default function App() {
       console.log(JSON.stringify(err, null, 2));
     }
   }
+
+  const [fontsLoaded] = useFonts({
+      'SF-Pro-Display-Regular': require('./assets/fonts/SF-Pro-Display-Regular.otf'),
+      'SF-Pro-Display-Bold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
+  });
+
+  if(!fontsLoaded) return null;
 
   return (
     <>

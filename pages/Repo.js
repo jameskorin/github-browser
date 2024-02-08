@@ -7,7 +7,6 @@ import Star from '../assets/star.svg'
 import Fork from '../assets/repo-forked.svg'
 import Eye from '../assets/eye.svg'
 import Back from '../assets/arrow-left.svg'
-import { useFonts } from 'expo-font'
 import splitTextForHighlight from '../util/splitTextForHighlight'
 
 export default function Repo({ navigation }) {
@@ -22,15 +21,8 @@ export default function Repo({ navigation }) {
 
     const repo = context.repos.find(e => e.id == context.selectedRepo);
 
-    const [fontsLoaded] = useFonts({
-        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-    });
     const bold = 'SF-Pro-Display-Bold';
     const regular = 'SF-Pro-Display-Regular';
-
-    if(!fontsLoaded) return null;
-
     const split_name = splitTextForHighlight({text: repo.full_name, highlight: context.highlight});
     const split_description = splitTextForHighlight({text: repo.description, highlight: context.highlight});
     const regex = new RegExp(`(${context.highlight})`, 'gi');
