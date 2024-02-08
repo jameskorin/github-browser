@@ -33,16 +33,21 @@ export default function RepoCard({
 
 const styles = StyleSheet.create({
     card: {
-      borderRadius: 9,
-      backgroundColor: "#FFFFFF",
-      paddingHorizontal: 16,
-      paddingVertical: 16,
-      flexDirection: "column",
-      marginBottom: 16,
-      shadowColor: "#FFFFFF",
-      shadowOpacity: 0.1,
-      shadowOffset: 0,
-      marginHorizontal: 30
+        borderRadius: 9,
+        backgroundColor: "#FFFFFF",
+        paddingHorizontal: 16,
+        paddingVertical: 16,
+        flexDirection: "column",
+        marginBottom: 16,
+        marginHorizontal: 30,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.02,
+        shadowRadius: 4,
+        elevation: 2,
     },
     cardTopRow: {
       flexDirection: "row",

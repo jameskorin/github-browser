@@ -83,15 +83,13 @@ export default function App() {
 // Fix expo issue and get the app running on device
 
 // Search page
-  // Background on search input container
-  // Show border on search input container bottom after scrolling
   // Truncate long full names on cards in list
   // Scroll to top of list on list change
-  // Fix color on clear search button
   // Wrap all svg buttons with TouchableWithoutFeedback
 
 // Fix font import issue
 // Get all font weights correct
+// Get all font sizes correct
 
 // Highlight search term in titles and descriptions in results page
 // Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
