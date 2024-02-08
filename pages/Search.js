@@ -19,6 +19,7 @@ export default function Search({ navigation }) {
     const context = useContext(Context);
     const [searchQuery, setSearchQuery] = useState('tetris+language:assembly&sort=stars&order=desc');
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+    const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
       const timerId = setTimeout(() => {
@@ -35,18 +36,25 @@ export default function Search({ navigation }) {
         context.search(debouncedSearchQuery);
     }, [debouncedSearchQuery]);
 
+    const handleScroll =(event)=> {
+      const scrollPosition = event.nativeEvent.contentOffset.y;
+      if (scrollPosition > 62) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    }
+
     // const [fontsLoaded] = useFonts({
     //     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
     //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
     // });
-  
-    // if(!fontsLoaded) return null;
 
-    return (
-        <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
+    return (<LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
         <ScrollView stickyHeaderIndices={[1]} showsVerticalScrollIndicator={false}
-        style={styles.scrollView}>
+        style={styles.scrollView} onScroll={handleScroll}
+        scrollEventThrottle={16}>
 
           {/* Header */}
         <View style={styles.header}>
@@ -60,7 +68,7 @@ export default function Search({ navigation }) {
           </Text>
         </View>
 
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} isSticky={isSticky}/>
 
           {context.repos.map((item, index) => (
             <RepoCard

@@ -83,9 +83,8 @@ export default function App() {
 // Fix expo issue and get the app running on device
 
 // Search page
-  // Collapse the header on scroll
-  // Debounce on search input update and call endpoint from input changes
-  // Add a chin to the bottom of the results page
+  // Background on search input container
+  // Show border on search input container bottom after scrolling
   // Truncate long full names on cards in list
   // Scroll to top of list on list change
   // Fix color on clear search button

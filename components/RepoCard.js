@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 16,
       paddingVertical: 16,
       flexDirection: "column",
-      marginTop: 16,
+      marginBottom: 16,
       shadowColor: "#FFFFFF",
       shadowOpacity: 0.1,
       shadowOffset: 0,

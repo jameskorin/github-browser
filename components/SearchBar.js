@@ -5,7 +5,8 @@ import ClearSearchIcon from '../assets/x.svg'
 
 export default function SearchBar({
     searchQuery,
-    setSearchQuery
+    setSearchQuery,
+    isSticky
 }) {
 
     // const [fontsLoaded] = useFonts({
@@ -13,7 +14,8 @@ export default function SearchBar({
     //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
     // });
 
-    return <View style={styles.outer}>
+    return <View //style={{backgroundColor: "#e2dcee",...styles.outer}}
+    style={[styles.outer, isSticky && styles.sticky]}>
         <View style={styles.searchContainer}>
 
         <SearchIcon/>
@@ -32,7 +34,13 @@ const styles = StyleSheet.create({
     outer: {
         width: "100%",
         paddingHorizontal: 30,
-        paddingBottom: 16
+        paddingBottom: 16,
+        marginBottom: 2
+    },
+    sticky: {
+        backgroundColor: "#e2dcee",
+        borderBottomColor: "#D9D2E5",
+        borderBottomWidth: 1
     },
     searchContainer: {
         backgroundColor: "#edebf4",
@@ -44,7 +52,8 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     searchInput: {
-      marginLeft: 14
+      marginLeft: 14,
+      maxWidth: "80%"
     },
     clear: {
         width: 18,
