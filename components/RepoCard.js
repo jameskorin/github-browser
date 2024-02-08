@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
-// import { useFonts } from 'expo-font'
+import { useFonts } from 'expo-font'
 import { Context } from '../util/Context'
 
 export default function RepoCard({
@@ -10,10 +10,12 @@ export default function RepoCard({
 
     const context = useContext(Context);
 
-    // const [fontsLoaded] = useFonts({
-    //     'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
-    //     'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
-    // });
+    const [fontsLoaded] = useFonts({
+        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
+    });
+
+    if(!fontsLoaded) return null;
 
     return <TouchableWithoutFeedback onPress={() => {
         context.setSelectedRepo(repo.id);
@@ -55,11 +57,13 @@ const styles = StyleSheet.create({
     },
     description: {
         marginTop: 12,
-        fontFamily: 'SF-Pro-Display-Regular'
+        fontFamily: 'SF-Pro-Display-Regular',
+        fontSize: 14
     },
     name: {
         marginLeft: 11,
-        fontFamily: 'SF-Pro-Display-Regular'
+        fontFamily: 'SF-Pro-Display-Regular',
+        fontSize: 14
     },  
     avatar: {
         width: 24,

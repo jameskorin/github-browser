@@ -7,6 +7,7 @@ import Star from '../assets/star.svg'
 import Fork from '../assets/repo-forked.svg'
 import Eye from '../assets/eye.svg'
 import Back from '../assets/arrow-left.svg'
+import { useFonts } from 'expo-font'
 
 export default function Repo({ navigation }) {
 
@@ -17,6 +18,12 @@ export default function Repo({ navigation }) {
     if(context.selectedRepo === '') return null;
 
     const repo = context.repos.find(e => e.id == context.selectedRepo);
+
+    const [fontsLoaded] = useFonts({
+        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+        'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Bold.otf'),
+    });
+    if(!fontsLoaded) return null;
 
     return <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
@@ -53,7 +60,7 @@ export default function Repo({ navigation }) {
         <View style={styles.break}/>
 
         <View style={styles.section}>
-            <Text>{repo.description}</Text>
+            <Text style={styles.description}>{repo.description}</Text>
 
             <Text style={styles.languageHeader}>Languages</Text>
 
@@ -96,7 +103,8 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 20,
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: 'SF-Pro-Display-Regular'
     },
     statsRow: {
         flexDirection: "row"
@@ -120,12 +128,14 @@ const styles = StyleSheet.create({
         flexDirection: "column"
     },
     languageHeader: {
-        fontWeight: 700,
+        fontFamily: 'SF-Pro-Display-Bold',
         marginTop: 24,
-        marginBottom: 16
+        marginBottom: 16,
+        fontSize: 14
     },
     language: {
-        marginBottom: 5
+        marginBottom: 5,
+        fontSize: 14
     },
     repoLinkContainer: {
         position: 'absolute',
@@ -146,10 +156,15 @@ const styles = StyleSheet.create({
     },
     repoLinkText: {
         color: "#FFFFFF",
-        lineHeight: 16
+        lineHeight: 16,
+        fontFamily: 'SF-Pro-Display-Bold',
+        fontSize: 16
     },
     backArrow: {
         marginLeft: 30,
         marginBottom: 18
+    },
+    description: {
+        fontSize: 14
     }
   });
