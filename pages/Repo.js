@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Image, View, TouchableOpacity, Linking } from 'react-native'
+import { StyleSheet, Text, Image, View, TouchableOpacity, Linking, TouchableHighlight } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient"
 import { useContext } from 'react'
 import { Context } from '../util/Context'
@@ -35,7 +35,16 @@ export default function Repo({ navigation }) {
 
     return <LinearGradient colors={['#e2dcee', '#f1f1f1']} style={styles.linearGradient}>
 
-        <Back onPress={() => navigation.goBack()} style={styles.backArrow}/>
+        <TouchableHighlight onPress={() => navigation.goBack()} style={styles.backArrow} underlayColor={'#e2dcee'}>
+            <View style={{
+                width: 24,
+                height: 24
+            }}>
+                <Back/>
+            </View>
+        </TouchableHighlight>
+
+        
 
         <View style={styles.section}>
             <Image source={{uri: repo.owner.avatar_url}} 

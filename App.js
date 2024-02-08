@@ -85,9 +85,7 @@ export default function App() {
 
 // Fix expo issue and get the app running on device
 
-// Search page
-  // Wrap all svg buttons with TouchableWithoutFeedback
 
-// Construct search query (search for terms in names, readmes, etc. instead of just submitting the keyword)
-
-// Check UI scaling on all device resolutions
+// Wrap all svg buttons with TouchableWithoutFeedback
+  // Clear search
+  // Back arrow

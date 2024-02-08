@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, TouchableHighlight, TouchableWithoutFeedback, View } from 'react-native'
 import SearchIcon from '../assets/search.svg'
 import ClearSearchIcon from '../assets/x.svg'
 import { useFonts } from 'expo-font'
@@ -26,7 +26,18 @@ export default function SearchBar({
         onChangeText={text => setSearchQuery(text)} 
         value={searchQuery}/>
 
-        <ClearSearchIcon style={styles.clear} onPress={() => setSearchQuery('')}/>
+        <TouchableHighlight onPress={() => setSearchQuery('')} style={styles.clear} underlayColor={'#edebf4'}>
+            <View style={{
+                width: 18,
+                height: 18
+            }}>
+                <ClearSearchIcon style={{
+                    position: 'absolute',
+                    top: -2,
+                    left: 0
+                }}/>
+            </View>
+        </TouchableHighlight>
     </View>
     </View>;
 }
