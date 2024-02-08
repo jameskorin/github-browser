@@ -57,7 +57,6 @@ export default function Search({ navigation }) {
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 75,
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
